@@ -14,7 +14,7 @@
             Raffling {{ raffle.events | length }} events!
         </div>
         <div class="col-md-4">
-            {% if raffle.commentsEligibleForRaffling.count > 0 %}
+            {% if raffle.commentsEligibleForRaffling | length > 0 %}
                 <form action="{{ path('raffle_web_pick', {'id': raffle.id}) }}" method="POST">
                     <button type="submit" class="btn btn-success btn-lg"> RAFFLE!</button>
                 </form>

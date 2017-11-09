@@ -4,42 +4,21 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Entity\JoindInUser;
-use App\Entity\Raffle;
-use App\Repository\JoindInEventRepository;
-use App\Repository\JoindInUserRepository;
-use App\Repository\RaffleRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\EntityManagerInterface;
-use Ramsey\Uuid\Uuid;
+use GuzzleHttp\Client;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 class RaffleWebController extends Controller
 {
-    /** @var JoindInEventRepository */
-    /** @var RaffleRepository */
-    private $raffleRepository;
-    /** @var JoindInUserRepository */
-    private $userRepository;
-    private $eventRepository;
-    /** @var EntityManagerInterface */
-    private $entityManager;
+    /** @var Client */
+    private $client;
 
-    public function __construct(
-        JoindInEventRepository $eventRepository,
-        RaffleRepository $raffleRepository,
-        JoindInUserRepository $userRepository,
-        EntityManagerInterface $entityManager
-    ) {
-        $this->eventRepository  = $eventRepository;
-        $this->raffleRepository = $raffleRepository;
-        $this->userRepository   = $userRepository;
-        $this->entityManager    = $entityManager;
+    public function __construct(Client $client)
+    {
+        $this->client = $client;
     }
 
     /*
-
             dev.raffler.loc:8000/api/joindin/events/fetch
             dev.raffler.loc:8000/api/joindin/talks/fetch
             dev.raffler.loc:8000/api/joindin/comments/fetch
@@ -48,7 +27,7 @@ class RaffleWebController extends Controller
     public function index()
     {
         $data = [
-            'events' => $this->getAllEvents(),
+            'events' => $this->apiGetJson('joindin/events/'),
         ];
 
         return $this->render('Raffle/index.html.twig', $data);
@@ -56,34 +35,21 @@ class RaffleWebController extends Controller
 
     public function start(Request $request)
     {
-        $requestVars = $request->request->all();
+        $eventIds = array_keys($request->request->all());
 
-        $eventIds = array_keys($requestVars);
+        $options = [
+            'json' => ['events' => $eventIds],
+        ];
 
-        $id = Uuid::uuid4()->toString();
+        $raffleId = $this->apiPostJson('raffle/start', $options);
 
-        $events = new ArrayCollection();
-
-        foreach ($eventIds as $eventId) {
-            $event = $this->eventRepository->find($eventId);
-            $events->add($event);
-        }
-
-        $raffle = new Raffle($id, $events);
-
-        $this->entityManager->persist($raffle);
-
-        $this->entityManager->flush();
-
-        return $this->redirect($this->generateUrl('raffle_web_show', ['id' => $raffle->getId()]));
+        return $this->redirect($this->generateUrl('raffle_web_show', ['id' => $raffleId]));
     }
 
     public function show(string $id)
     {
-        $raffle = $this->loadRaffle($id);
-
         $data = [
-            'raffle' => $raffle,
+            'raffle' => $this->apiGetJson('raffle/'.$id),
         ];
 
         return $this->render('Raffle/show.html.twig', $data);
@@ -91,13 +57,9 @@ class RaffleWebController extends Controller
 
     public function pick(string $id)
     {
-        $raffle = $this->loadRaffle($id);
-
-        $user = $raffle->pick();
-
         $data = [
-            'raffle' => $raffle,
-            'user'   => $user,
+            'raffle' => $this->apiGetJson('raffle/'.$id),
+            'user'   => $this->apiPostJson('raffle/'.$id.'/pick'),
         ];
 
         return $this->render('Raffle/pick.html.twig', $data);
@@ -105,38 +67,29 @@ class RaffleWebController extends Controller
 
     public function winner(string $id, string $userId)
     {
-        $raffle = $this->loadRaffle($id);
-        $user   = $this->loadUser($userId);
+        $this->apiPostJson('raffle/'.$id.'/winner/'.$userId);
 
-        $raffle->userWon($user);
-        $this->entityManager->flush();
-
-        return $this->redirect($this->generateUrl('raffle_web_show', ['id' => $raffle->getId()]));
+        return $this->redirect($this->generateUrl('raffle_web_show', ['id' => $id]));
     }
 
     public function noShow(string $id, string $userId)
     {
-        $raffle = $this->loadRaffle($id);
-        $user   = $this->loadUser($userId);
+        $this->apiPostJson('raffle/'.$id.'/no_show/'.$userId);
 
-        $raffle->userIsNoShow($user);
-        $this->entityManager->flush();
-
-        return $this->redirect($this->generateUrl('raffle_web_show', ['id' => $raffle->getId()]));
+        return $this->redirect($this->generateUrl('raffle_web_show', ['id' => $id]));
     }
 
-    private function getAllEvents()
+    private function apiGetJson(string $url)
     {
-        return $this->eventRepository->findAll();
+        $response = $this->client->get(getenv('API_BASE_URL').$url);
+
+        return json_decode($response->getBody()->getContents(), true);
     }
 
-    private function loadRaffle(string $raffleId): Raffle
+    private function apiPostJson(string $url, array $options = [])
     {
-        return $this->raffleRepository->find($raffleId);
-    }
+        $response = $this->client->post(getenv('API_BASE_URL').$url, $options);
 
-    private function loadUser(string $id): JoindInUser
-    {
-        return $this->userRepository->find($id);
+        return json_decode($response->getBody()->getContents(), true);
     }
 }
