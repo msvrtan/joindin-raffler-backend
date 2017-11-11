@@ -1,0 +1,10 @@
+paths:
+  code:
+    "src/": ""
+  spec:
+    "spec/": spec\
+  tests:
+    "tests/": App\Tests\
+phpunit:
+  base_namespace: App\Tests
+  base_test_class_name: \PHPUnit\Framework\TestCase
