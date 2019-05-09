@@ -3,42 +3,19 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use FOS\UserBundle\Model\User as BaseUser;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="fos_user")
+ * @ORM\Table(name="users")
  */
-class User extends BaseUser
+class User
 {
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected $id;
+    public $id;
 
-    /**
-     * @var bool
-     *
-     * Flags this user as admin (adds ROLE_SUPER_ADMIN)
-     */
-    private $administrator;
-
-    public function __construct()
-    {
-        parent::__construct();
-        // your own logic
-    }
-
-    public function isAdministrator(): bool
-    {
-        return $this->isSuperAdmin();
-    }
-
-    public function setAdministrator($boolean)
-    {
-        $this->setSuperAdmin($boolean);
-        $this->administrator = $boolean;
-    }
+    /** @ORM\Column(type="string",length=20) */
+    public $username;
 }

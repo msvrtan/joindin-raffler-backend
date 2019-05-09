@@ -3,100 +3,29 @@ version: '2'
 
 services:
 
-  code:
+  raffler_code:
     image: msvrtan/code:0.2.0
-    container_name: code
+    container_name: raffler_code
     volumes:
       - ./:/var/www
 
-  nginx-dev:
-    build:
-      context: ./etc/docker/nginx-sf4-dev
-    container_name: nginx-dev
-    volumes_from:
-      - code
-    volumes:
-      - ./var/logs/dev/nginx/:/var/log/nginx
-    ports:
-      - "8000:80"
-    links:
-      - php7fpm-dev
-      - php7fpm-test
-
-  php7fpm-dev:
-    container_name: php7fpm-dev
-    image: msvrtan/php7fpm-dev:0.4.1
-    shm_size: 256MB
-    volumes_from:
-      - code
-    volumes:
-      - ./var/logs/dev/php-fpm/:/var/log/php-fpm
-    expose:
-      - "9000"
-    environment:
-      APP_ENV: dev
-      APP_DEBUG: 1
-      APP_SECRET: f89cdd4e751e8144aeb61d81fb78fc65
-      DATABASE_DRIVER: pdo_pgsql
-      DATABASE_SERVER_VERSION: 10.0
-      DATABASE_HOST: pgsql_dev
-      DATABASE_PORT: 5432
-      DATABASE_NAME: raffler_dev
-      DATABASE_USER: root
-      DATABASE_PASSWORD: n0p455
-      API_BASE_URL: http://dev.raffler.loc:8000/api/
-    links:
-      - pgsql_dev
-    extra_hosts:
-      - "dev.raffler.loc:172.17.0.1"
-      - "test.raffler.loc:172.17.0.1"
-
-  php7fpm-test:
-    container_name: php7fpm-test
-    image: msvrtan/php7fpm-dev:0.4.1
-    shm_size: 256MB
-    volumes_from:
-      - code
-    volumes:
-      - ./var/logs/test/php-fpm/:/var/log/php-fpm
-    expose:
-      - "9000"
-    environment:
-      APP_ENV: test
-      APP_DEBUG: 1
-      APP_SECRET: f89cdd4e751e8144aeb61d81fb78fc65
-      DATABASE_DRIVER: pdo_pgsql
-      DATABASE_SERVER_VERSION: 10.0
-      DATABASE_HOST: pgsql_dev
-      DATABASE_PORT: 5432
-      DATABASE_NAME: raffler_test
-      DATABASE_USER: root
-      DATABASE_PASSWORD: n0p455
-      API_BASE_URL: http://test.raffler.loc:8000/api/
-    links:
-      - pgsql_dev
-    extra_hosts:
-      - "dev.raffler.loc:172.17.0.1"
-      - "test.raffler.loc:172.17.0.1"
-
-  pgsql_dev:
+  raffler_pgsql_dev:
     image: postgres:10.0
-    container_name: pgsql_dev
+    container_name: raffler_pgsql_dev
     ports:
       - "5432:5432"
     environment:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: n0p455
 
-  workspace:
-    container_name: workspace
+  raffler_workspace:
+    container_name: raffler_workspace
     image: msvrtan/workspace-dev:0.5.0
     shm_size: 256MB
     volumes_from:
-      - code
+      - raffler_code
     links:
-      - pgsql_dev
-      - nginx-dev
+      - raffler_pgsql_dev
     extra_hosts:
       - "dev.raffler.loc:172.17.0.1"
       - "test.raffler.loc:172.17.0.1"
@@ -106,18 +35,10 @@ services:
       APP_SECRET: f89cdd4e751e8144aeb61d81fb78fc65
       DATABASE_DRIVER: pdo_pgsql
       DATABASE_SERVER_VERSION: 10.0
-      DATABASE_HOST: pgsql_dev
+      DATABASE_HOST: raffler_pgsql_dev
       DATABASE_PORT: 5432
       DATABASE_NAME: raffler_dev
       DATABASE_USER: root
       DATABASE_PASSWORD: n0p455
       API_BASE_URL: http://test.raffler.loc:8000/api/
 
-  xdebug:
-    container_name: xdebug
-    image: msvrtan/xdebug-dev:0.4.1
-    shm_size: 256MB
-    volumes_from:
-      - code
-    links:
-      - pgsql_dev
