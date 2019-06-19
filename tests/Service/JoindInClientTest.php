@@ -41,16 +41,16 @@ class JoindInClientTest extends TestCase
 
     public function testFetchZgPhpEvents(): void
     {
-        $this->markTestSkipped('Skipping');
+        self::markTestSkipped('Skipping');
     }
 
     public function testFetchTalksForEvent(): void
     {
-        $this->markTestSkipped('Skipping');
+        self::markTestSkipped('Skipping');
     }
 
     public function testFetchCommentsForTalk(): void
     {
-        $this->markTestSkipped('Skipping');
+        self::markTestSkipped('Skipping');
     }
 }

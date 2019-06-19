@@ -37,6 +37,6 @@ class JoindInEventRetrievalTest extends TestCase
 
     public function testFetch(): void
     {
-        $this->markTestSkipped('Skipping');
+        self::markTestSkipped('Skipping');
     }
 }

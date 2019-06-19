@@ -35,12 +35,12 @@ class JoindInUserTest extends TestCase
 
     public function testSetUsername(): void
     {
-        $this->markTestSkipped('Skipping');
+        self::markTestSkipped('Skipping');
     }
 
     public function testSetDisplayName(): void
     {
-        $this->markTestSkipped('Skipping');
+        self::markTestSkipped('Skipping');
     }
 
     public function testPromoteToOrganizer(): void
@@ -71,16 +71,16 @@ class JoindInUserTest extends TestCase
 
     public function testJsonSerialize(): void
     {
-        $this->markTestSkipped('Skipping');
+        self::markTestSkipped('Skipping');
     }
 
     public function testGetComments(): void
     {
-        $this->markTestSkipped('Skipping');
+        self::markTestSkipped('Skipping');
     }
 
     public function testAddComment(): void
     {
-        $this->markTestSkipped('Skipping');
+        self::markTestSkipped('Skipping');
     }
 }

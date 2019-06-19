@@ -35,12 +35,12 @@ class JoindInTalkTest extends TestCase
 
     public function testSetTitle(): void
     {
-        $this->markTestSkipped('Skipping');
+        self::markTestSkipped('Skipping');
     }
 
     public function testSetEvent(): void
     {
-        $this->markTestSkipped('Skipping');
+        self::markTestSkipped('Skipping');
     }
 
     public function testGetId(): void
@@ -60,21 +60,21 @@ class JoindInTalkTest extends TestCase
 
     public function testGetCreatedAt(): void
     {
-        $this->markTestSkipped('Skipping');
+        self::markTestSkipped('Skipping');
     }
 
     public function testGetComments(): void
     {
-        $this->markTestSkipped('Skipping');
+        self::markTestSkipped('Skipping');
     }
 
     public function testAddComment(): void
     {
-        $this->markTestSkipped('Skipping');
+        self::markTestSkipped('Skipping');
     }
 
     public function testJsonSerialize(): void
     {
-        $this->markTestSkipped('Skipping');
+        self::markTestSkipped('Skipping');
     }
 }
