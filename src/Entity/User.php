@@ -16,6 +16,9 @@ class User
      */
     public $id;
 
-    /** @ORM\Column(type="string",length=20) */
-    public $username;
+	/** @ORM\Column(type="string",length=20) */
+	public $username;
+
+	/** @ORM\Column(type="string",length=20) */
+	public $firstName;
 }

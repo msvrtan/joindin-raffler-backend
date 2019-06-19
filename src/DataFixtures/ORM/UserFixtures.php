@@ -15,6 +15,7 @@ class UserFixtures extends AbstractFixture
 		$admin = new User();
 		$admin->id = 1;
 		$admin->username = 'admin';
+		$admin->firstName = 'Alex';
 
 		$manager->persist($admin);
 
