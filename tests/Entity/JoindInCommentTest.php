@@ -25,7 +25,7 @@ class JoindInCommentTest extends TestCase
     /** @var JoindInComment */
     private $joindInComment;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->user           = Mockery::mock(JoindInUser::class);
         $this->talk           = Mockery::mock(JoindInTalk::class);

@@ -25,7 +25,7 @@ class JoindInEventTest extends TestCase
     /** @var JoindInEvent */
     private $joindInEvent;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->id           = 1;
         $this->name         = 'name';

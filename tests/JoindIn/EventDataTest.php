@@ -25,7 +25,7 @@ class EventDataTest extends TestCase
     /** @var EventData */
     private $eventData;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->id        = 1;
         $this->name      = 'name';

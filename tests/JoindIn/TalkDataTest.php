@@ -25,7 +25,7 @@ class TalkDataTest extends TestCase
     /** @var TalkData */
     private $talkData;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->id       = 1;
         $this->title    = 'title';

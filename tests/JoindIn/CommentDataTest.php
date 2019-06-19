@@ -24,7 +24,7 @@ class CommentDataTest extends TestCase
     /** @var CommentData */
     private $commentData;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->userData    = new UserData(100001, 'username', 'Vanja Horvat');
         $this->talk        = new JoindInTalk(30000, 'Developing xyz', Mockery::mock(JoindInEvent::class));

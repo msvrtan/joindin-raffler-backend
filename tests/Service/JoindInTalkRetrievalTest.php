@@ -27,7 +27,7 @@ class JoindInTalkRetrievalTest extends TestCase
     /** @var JoindInTalkRetrieval */
     private $joindInTalkRetrieval;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->joindInClient        = Mockery::mock(JoindInClient::class);
         $this->entityManager        = Mockery::mock(EntityManagerInterface::class);

@@ -30,7 +30,7 @@ class JoindInClientTest extends TestCase
     /** @var JoindInClient */
     private $joindInClient;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->client             = Mockery::mock(Client::class);
         $this->eventDataFactory   = Mockery::mock(EventDataFactory::class);

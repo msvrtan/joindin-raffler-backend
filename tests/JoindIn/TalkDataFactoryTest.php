@@ -16,7 +16,7 @@ class TalkDataFactoryTest extends TestCase
     /** @var TalkDataFactory */
     private $talkDataFactory;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->talkDataFactory = new TalkDataFactory();
     }

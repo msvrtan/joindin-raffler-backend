@@ -25,7 +25,7 @@ class JoindInTalkTest extends TestCase
     /** @var JoindInTalk */
     private $joindInTalk;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->id          = 1;
         $this->title       = 'title';

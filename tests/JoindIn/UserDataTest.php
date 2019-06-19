@@ -22,7 +22,7 @@ class UserDataTest extends TestCase
     /** @var UserData */
     private $userData;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->id          = 1;
         $this->username    = 'username';

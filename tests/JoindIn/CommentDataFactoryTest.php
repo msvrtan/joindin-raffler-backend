@@ -19,7 +19,7 @@ class CommentDataFactoryTest extends TestCase
     /** @var CommentDataFactory */
     private $commentDataFactory;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->commentDataFactory = new CommentDataFactory();
     }
