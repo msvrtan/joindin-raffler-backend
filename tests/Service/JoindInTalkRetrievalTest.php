@@ -35,7 +35,7 @@ class JoindInTalkRetrievalTest extends TestCase
         $this->joindInTalkRetrieval = new JoindInTalkRetrieval($this->joindInClient, $this->entityManager, $this->talkRepository);
     }
 
-    public function testFetch()
+    public function testFetch(): void
     {
         $this->markTestSkipped('Skipping');
     }

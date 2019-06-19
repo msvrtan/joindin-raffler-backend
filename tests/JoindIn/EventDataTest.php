@@ -33,17 +33,17 @@ class EventDataTest extends TestCase
         $this->eventData = new EventData($this->id, $this->name, $this->date);
     }
 
-    public function testGetId()
+    public function testGetId(): void
     {
         self::assertEquals($this->id, $this->eventData->getId());
     }
 
-    public function testGetName()
+    public function testGetName(): void
     {
         self::assertEquals($this->name, $this->eventData->getName());
     }
 
-    public function testGetDate()
+    public function testGetDate(): void
     {
         self::assertEquals($this->date, $this->eventData->getDate());
     }

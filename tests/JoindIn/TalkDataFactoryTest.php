@@ -21,7 +21,7 @@ class TalkDataFactoryTest extends TestCase
         $this->talkDataFactory = new TalkDataFactory();
     }
 
-    public function testCreate()
+    public function testCreate(): void
     {
         $this->markTestSkipped('Skipping');
     }

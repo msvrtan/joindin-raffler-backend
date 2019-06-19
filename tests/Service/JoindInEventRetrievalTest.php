@@ -35,7 +35,7 @@ class JoindInEventRetrievalTest extends TestCase
         $this->joindInEventRetrieval = new JoindInEventRetrieval($this->joindInClient, $this->entityManager, $this->eventRepository);
     }
 
-    public function testFetch()
+    public function testFetch(): void
     {
         $this->markTestSkipped('Skipping');
     }

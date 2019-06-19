@@ -21,7 +21,7 @@ class EventDataFactoryTest extends TestCase
         $this->eventDataFactory = new EventDataFactory();
     }
 
-    public function testCreate()
+    public function testCreate(): void
     {
         $this->markTestSkipped('Skipping');
     }

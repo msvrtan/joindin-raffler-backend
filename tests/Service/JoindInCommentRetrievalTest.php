@@ -44,7 +44,7 @@ class JoindInCommentRetrievalTest extends TestCase
         );
     }
 
-    public function testFetch()
+    public function testFetch(): void
     {
         $this->markTestSkipped('Skipping');
     }

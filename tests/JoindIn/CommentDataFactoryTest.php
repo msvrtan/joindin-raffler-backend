@@ -24,7 +24,7 @@ class CommentDataFactoryTest extends TestCase
         $this->commentDataFactory = new CommentDataFactory();
     }
 
-    public function testCreate()
+    public function testCreate(): void
     {
         // Arrange.
         $input = [
