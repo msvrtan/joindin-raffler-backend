@@ -8,6 +8,9 @@ parameters:
 		yieldRules: true
 		validateParameters: true
 	ignoreErrors:
+		-
+			message: '#Yield can be used only with these return types: Generator, Iterator, Traversable, iterable.#'
+			path: %currentWorkingDirectory%/src/Kernel.php
 
 	symfony:
 		container_xml_path: var/cache/test/srcTestDebugProjectContainer.xml
