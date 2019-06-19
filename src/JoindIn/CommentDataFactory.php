@@ -26,7 +26,7 @@ class CommentDataFactory
 
     private function extractIdFromUri(string $uri): int
     {
-        if (preg_match('|https://api.joind.in/v2.1/talk_comments/(?<id>[\d]*)$|', $uri, $matches)) {
+        if (false !== preg_match('|https://api.joind.in/v2.1/talk_comments/(?<id>[\d]*)$|', $uri, $matches)) {
             return (int) $matches['id'];
         }
         throw new Exception('Unparsable '.$uri);
@@ -34,7 +34,7 @@ class CommentDataFactory
 
     private function extractUserIdFromUri(string $uri): int
     {
-        if (preg_match('|https://api.joind.in/v2.1/users/(?<id>[\d]*)$|', $uri, $matches)) {
+        if (false !== preg_match('|https://api.joind.in/v2.1/users/(?<id>[\d]*)$|', $uri, $matches)) {
             return (int) $matches['id'];
         }
         throw new Exception('Unparsable '.$uri);

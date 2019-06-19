@@ -19,7 +19,7 @@ class TalkDataFactory
 
     private function extractIdFromUri(string $uri): int
     {
-        if (preg_match('|https://api.joind.in/v2.1/talks/(?<id>[\d]*)$|', $uri, $matches)) {
+        if (false !== preg_match('|https://api.joind.in/v2.1/talks/(?<id>[\d]*)$|', $uri, $matches)) {
             return (int) $matches['id'];
         }
         throw new \Exception('Unparsable '.$uri);
