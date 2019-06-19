@@ -63,7 +63,7 @@ trait HelperTrait
 
     protected function loadRaffle(string $raffleId): Raffle
     {
-        return $this->getRaffleRepository()->find($raffleId);
+        return $this->getRaffleRepository()->load($raffleId);
     }
 
     protected function getEventRepository(): JoindInEventRepository
