@@ -80,7 +80,7 @@ class RaffleTest extends TestCase
 
         // Assert.
 
-        $this->assertInstanceOf(Raffle::class, $raffle);
+        self::assertInstanceOf(Raffle::class, $raffle);
     }
 
     public function testRaffleWillBeCreated2(): void
@@ -101,6 +101,6 @@ class RaffleTest extends TestCase
 
         // Assert.
 
-        $this->assertInstanceOf(Raffle::class, $raffle);
+        self::assertInstanceOf(Raffle::class, $raffle);
     }
 }

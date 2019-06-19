@@ -13,6 +13,6 @@ class NoCommentsToRaffleExceptionTest extends TestCase
 {
     public function testForRaffle(): void
     {
-        $this->assertInstanceOf(NoCommentsToRaffleException::class, NoCommentsToRaffleException::forRaffle('123'));
+        self::assertInstanceOf(NoCommentsToRaffleException::class, NoCommentsToRaffleException::forRaffle('123'));
     }
 }
