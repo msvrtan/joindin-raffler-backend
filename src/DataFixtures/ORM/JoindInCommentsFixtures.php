@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\DataFixtures\ORM;
 
 use App\Entity\JoindInComment;
+use App\Entity\JoindInTalk;
+use App\Entity\JoindInUser;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -13,7 +15,13 @@ class JoindInCommentsFixtures extends AbstractFixture implements OrderedFixtureI
 {
     public function load(ObjectManager $manager)
     {
+        /** @var JoindInTalk $fullStacking101Talk */
         $fullStacking101Talk = $this->getReference('october-talk-22817');
+
+        /** @var JoindInUser $user1 */
+        $user1 = $this->getReference('user1');
+        /** @var JoindInUser $user2 */
+        $user2 = $this->getReference('user2');
 
         $fullStackingComments = [
             'comment1' => new JoindInComment(
@@ -21,11 +29,12 @@ class JoindInCommentsFixtures extends AbstractFixture implements OrderedFixtureI
                 'A nice overview of all the pros and cons of knowing a lot of stuff and how to learn
                  a new technology and then use it in your daily routines',
                 5,
-                $this->getReference('user2'),
+                $user2,
                 $fullStacking101Talk
             ),
         ];
 
+        /** @var JoindInTalk $httpCachingTalk */
         $httpCachingTalk = $this->getReference('october-talk-22818');
 
         $httpCachingComments = [
@@ -33,7 +42,7 @@ class JoindInCommentsFixtures extends AbstractFixture implements OrderedFixtureI
                 83555,
                 'Great talk, some very useful Symfony HTTP cache tips and how-to were mentioned.',
                 5,
-                $this->getReference('user1'),
+                $user1,
                 $httpCachingTalk
             ),
             'comment2' => new JoindInComment(
@@ -41,7 +50,7 @@ class JoindInCommentsFixtures extends AbstractFixture implements OrderedFixtureI
                 'Great insight on how to use and implement http caching on a huge project.
                  Really liked the small details and real life examples that happen in the real world :)',
                 5,
-                $this->getReference('user2'),
+                $user2,
                 $httpCachingTalk
             ),
         ];

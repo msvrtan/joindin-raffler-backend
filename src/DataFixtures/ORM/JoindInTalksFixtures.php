@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\DataFixtures\ORM;
 
+use App\Entity\JoindInEvent;
 use App\Entity\JoindInTalk;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
@@ -13,6 +14,7 @@ class JoindInTalksFixtures extends AbstractFixture implements OrderedFixtureInte
 {
     public function load(ObjectManager $manager)
     {
+        /** @var JoindInEvent $octoberMeetup */
         $octoberMeetup = $this->getReference('event-october');
 
         $octoberTalks = [
